@@ -4,7 +4,7 @@ A node.js client library for weed-fs' REST interface.
 
 # What is weed-fs?
 
-Weed-FS is a simple and highly scalable distributed file system. There are two objectives:
+[Weed-FS](http://code.google.com/p/weed-fs/) is a simple and highly scalable distributed file system. There are two objectives:
 * to store billions of files!
 * to serve the files fast!
 
