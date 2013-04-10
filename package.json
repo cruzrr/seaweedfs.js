@@ -7,7 +7,7 @@
 		}
 	],
 	"name": 	"weed-fs",
-	"description":	"Node.js client for weed-fs, distrubited file store",
+	"description":	"Node.js client for weed-fs, a distributed file store",
 	"homepage":	"https://github.com/cruzrr/node-weedfs",
 	"version":	"0.0.1",
 	"main":		"./index",
