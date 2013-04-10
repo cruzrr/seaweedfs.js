@@ -1,4 +1,4 @@
-# node-weedfs
+# node-weedfs (weed-fs)
 
 A node.js client library for weed-fs' REST interface.
 
@@ -22,7 +22,7 @@ performance with your actual use cases.
 
 # Examples
 ```javascript
-var weedClient = require("node-weedfs");
+var weedClient = require("weed-fs");
 
 var weedfs     = new weedClient({
 	server:		"localhost",
