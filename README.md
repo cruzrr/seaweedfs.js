@@ -19,3 +19,17 @@ Weed-FS models after [Facebook's Haystack design paper](http://static.usenix.org
 
 Weed-FS costs only 40 bytes disk storage for each file's metadata. It is so simple with O(1) disk read that you are welcome to challenge the
 performance with your actual use cases.
+
+# Examples
+```javascript
+var weedClient = require("node-weedfs");
+
+var weedfs     = new weedClient({
+	server:		"localhost",
+	port:		"9333"
+});
+
+weedfs.write("./file.png", function(fileInfo) {
+	console.log(fileInfo);
+});
+```

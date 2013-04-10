@@ -1,0 +1,22 @@
+{
+	"author":	"cruzrr",
+	"contributors": [
+		{
+			"name":		"Aaron Blakely",
+			"email":	"aaron@cruzrr.com"
+		}
+	],
+	"name": 	"node-weedfs",
+	"description":	"Node.js client for weed-fs, distrubited file store",
+	"homepage":	"https://github.com/cruzrr/node-weedfs",
+	"version":	"0.0.1",
+	"main":		"./index",
+
+	"repository": {
+			"url":		"https://github.com/cruzrr/node-weedfs"
+	},
+
+	"dependencies": {
+		"request": "*"
+	}
+}

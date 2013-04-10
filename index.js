@@ -6,7 +6,4 @@
  *
  */
 
-var weedfs = require("./lib/weedfs");
-weedfs.request(require("request"));
-
-module.exports = weedfs;
+module.exports = require("./lib/weedfs.js");
