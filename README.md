@@ -33,3 +33,66 @@ weedfs.write("./file.png", function(fileInfo) {
 	console.log(fileInfo);
 });
 ```
+
+# write(file, cb)
+
+Use this function to store a file.  The callback will recieve an object of the parsed
+JSON response.
+
+```javascript
+client.write("./file.png", function(fileInfo) {
+	if (fileInfo.error) {
+		throw fileInfo.error;
+	}
+
+	console.log(fileinfo);
+});
+```
+
+# read(fileId, [stream, cb])
+
+The read function supports streaming.  To use simply do:
+
+```javascript
+client.read(fileId, fs.createWriteStream("read.png"));
+```
+
+If you prefer not to use streams just use:
+
+```javascript
+client.read(fileId, function(err, response, body) {
+	if (err) {
+		throw err;
+	}
+
+	// Here's your data:
+	var filedata = body;
+});
+```
+
+# find(file, cb)
+
+This function can be used to find the locations of a file amongst the cluster.
+
+```javascript
+client.find(fileId, function(public, servers) {
+	console.log(public[0]);
+
+	// servers contains the non-public URLs.  Use this for editing and removing.
+});
+```
+
+# remove(file, [server,] cb)
+
+This function will delete a file from the store.  If ```server``` is specified than the
+file will only be removed from that location.  Otherwise it will be deleted from all locations.
+
+```javascript
+client.remove(fileId, function(err) {
+	if (err) {
+		throw err;
+	}
+
+	console.log("removed files.");
+});
+```

@@ -5,6 +5,6 @@ var client = new weedfs({
 	port:		"9333"
 });
 
-client.write("./test.jpg", function(finfo) {
-	console.log(finfo);
+client.find('3,27193725f27d', function(flocation) {
+	console.log(flocation);
 });
