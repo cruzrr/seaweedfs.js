@@ -31,13 +31,17 @@ weedfs.write("./file.png", function(fileInfo) {
 });
 ```
 
-# write(file, cb)
+# write(file, [{opts}], cb)
 
 Use this function to store a file.  The callback will recieve an object of the parsed
 JSON response.
 
+The opts argument is optional.  Anything passed to it is made into a query string and
+is used with the /dir/assign HTTP request.  You can use this to define the replication
+strategy.
+
 ```javascript
-client.write("./file.png", function(fileInfo) {
+client.write("./file.png", {replication: 000}, function(fileInfo) {
 	if (fileInfo.error) {
 		throw fileInfo.error;
 	}
