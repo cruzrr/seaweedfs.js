@@ -49,6 +49,20 @@ client.write("./file.png", function(fileInfo) {
 });
 ```
 
+You can also do multiple uploads, this functionality is useful for storing different
+variations of the same file.
+
+```javascript
+client.write(["./file.jpg", "./file1.jpg"], function(fileInfo) {
+	// This call back will be called for both file and file1.
+	// The fids will be the same, to access each variaton just
+	// add _ARRAYINDEX to the end of the fid. in this case file1
+	// would be: fid + "_1"
+
+	console.log(fileInfo);
+}
+```
+
 # read(fileId, [stream, cb])
 
 The read function supports streaming.  To use simply do:
