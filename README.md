@@ -31,14 +31,12 @@ weedfs.write("./file.png", function(fileInfo) {
 });
 ```
 
-# write(file, [{opts}], cb)
+# write(file(s), [{opts}], cb)
 
-Use this function to store a file.  The callback will recieve an object of the parsed
-JSON response.
+Use the <code>write()</code> function to store files.  The callback recieves the parsed JSON response.
 
-The opts argument is optional.  Anything passed to it is made into a query string and
-is used with the /dir/assign HTTP request.  You can use this to define the replication
-strategy.
+Anything passed to the <code>{opts}</code> is made into a query string and
+is used with the <code>/dir/assign</code> HTTP request.  You can use this to define the replication strategy.
 
 ```javascript
 client.write("./file.png", {replication: 000}, function(fileInfo) {
@@ -50,16 +48,17 @@ client.write("./file.png", {replication: 000}, function(fileInfo) {
 });
 ```
 
-You can also do multiple uploads, this functionality is useful for storing different
-variations of the same file.
-
+You can also write multiple files:
 ```javascript
-client.write(["./file.jpg", "./file1.jpg"], function(fileInfo) {
-	// This call back will be called for both file and file1.
-	// The fids will be the same, to access each variaton just
-	// add _ARRAYINDEX to the end of the fid. in this case file1
+client.write(["./fileA.jpg", "./fileB.jpg"], function(fileInfo) {
+	// This callback will be called for both fileA and fileB.
+	// The fid's will be the same, to access each variaton just
+	// add _ARRAYINDEX to the end of the fid. In this case fileB
 	// would be: fid + "_1"
-
+	
+	var fidA = fileInfo;
+	var fidB = fileInfo + "_1";
+	
 	console.log(fileInfo);
 }
 ```
@@ -87,7 +86,7 @@ client.read(fileId, function(err, response, body) {
 
 # find(file, cb)
 
-This function can be used to find the locations of a file amongst the cluster.
+This function can be used to find the location(s) of a file amongst the cluster.
 
 ```javascript
 client.find(fileId, function(public, servers) {
@@ -99,7 +98,7 @@ client.find(fileId, function(public, servers) {
 
 # remove(file, [server,] cb)
 
-This function will delete a file from the store.  If ```server``` is specified than the
+This function will delete a file from the store.  If <code>server</code> is specified, the
 file will only be removed from that location.  Otherwise it will be deleted from all locations.
 
 ```javascript
@@ -108,6 +107,6 @@ client.remove(fileId, function(err) {
 		throw err;
 	}
 
-	console.log("removed files.");
+	console.log("removed file.");
 });
 ```
