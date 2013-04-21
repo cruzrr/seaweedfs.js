@@ -53,7 +53,7 @@ You can also write multiple files:
 client.write(["./fileA.jpg", "./fileB.jpg"], function(fileInfo) {
 	// This callback will be called for both fileA and fileB.
 	// The fid's will be the same, to access each variaton just
-	// add _ARRAYINDEX to the end of the fid. in this case fileB
+	// add _ARRAYINDEX to the end of the fid. In this case fileB
 	// would be: fid + "_1"
 	
 	var fidA = fileInfo;
