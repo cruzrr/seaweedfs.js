@@ -7,7 +7,7 @@ var client = new weedfs(config);
 
 
 fs.stat("./tests/test.jpg", function (err, stats) {
-	client.write("./tests/test.jpg", function(fileInfo) {
+	client.write("./tests/test.jpg", function(err, fileInfo) {
 
 		/* download test */
 

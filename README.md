@@ -26,7 +26,7 @@ var weedfs     = new weedClient({
 	port:		"9333"
 });
 
-weedfs.write("./file.png", function(fileInfo) {
+weedfs.write("./file.png", function(err, fileInfo) {
 	console.log(fileInfo);
 });
 ```
@@ -39,7 +39,7 @@ Anything passed to the <code>{opts}</code> is made into a query string and
 is used with the <code>/dir/assign</code> HTTP request.  You can use this to define the replication strategy.
 
 ```javascript
-client.write("./file.png", {replication: 000}, function(fileInfo) {
+client.write("./file.png", {replication: 000}, function(err, fileInfo) {
 	if (fileInfo.error) {
 		throw fileInfo.error;
 	}
@@ -50,7 +50,7 @@ client.write("./file.png", {replication: 000}, function(fileInfo) {
 
 You can also write multiple files:
 ```javascript
-client.write(["./fileA.jpg", "./fileB.jpg"], function(fileInfo) {
+client.write(["./fileA.jpg", "./fileB.jpg"], function(err, fileInfo) {
 	// This callback will be called for both fileA and fileB.
 	// The fid's will be the same, to access each variaton just
 	// add _ARRAYINDEX to the end of the fid. In this case fileB
@@ -102,11 +102,46 @@ This function will delete a file from the store.  If <code>server</code> is spec
 file will only be removed from that location.  Otherwise it will be deleted from all locations.
 
 ```javascript
-client.remove(fileId, function(err) {
+client.remove(fileId, function(err, resp, body) {
 	if (err) {
 		throw err;
 	}
 
 	console.log("removed file.");
+});
+```
+
+# systemStatus(cb)
+
+This function will query the master status for status information.  The callback contains
+an object containing the information.
+
+```javascript
+client.systemStatus(function(status) {
+	console.log(status);
+});
+```
+
+# status(server, port, cb)
+
+This function will query an individual volume server for server-specific information.
+
+```javascript
+client.status("localhost", 8080, function(status) {
+	console.log(status);
+});
+```
+
+# vacuum(opts, cb)
+
+This function will force the master server to preform garbage collection on volume servers.
+
+> # Force Garbage Collection
+>
+> If your system has many deletions, the deleted file's disk space will not be synchronously re-claimed. There is a background job to check volume disk usage. If empty space is more than the threshold, default to 0.3, the vacuum job will make the volume readonly, create a new volume with only existing files, and switch on the new volume. If you are impatient or doing some testing, vacuum the unused spaces this way.
+
+```javascript
+client.vacuum({garbageThreshold: 0.4}, function(status) {
+	console.log(status);
 });
 ```
