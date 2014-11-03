@@ -6,6 +6,7 @@ var config = JSON.parse(fs.readFileSync(process.argv[2], "utf8"));
 var client = new weedfs(config);
 
 client.write("./tests/test.jpg", function(err, fileInfo) {
+
 	client.find(fileInfo.fid, function(pub, pri) {
 		assert.ok(typeof pub, "array");
 		assert.ok(typeof pri, "array");
