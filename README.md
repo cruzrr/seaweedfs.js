@@ -27,7 +27,11 @@ var weedfs     = new weedClient({
 });
 
 weedfs.write("./file.png", function(err, fileInfo) {
-	console.log(fileInfo);
+	if (err) {
+		console.error(err);
+	} else {
+		console.log(fileInfo);
+	}
 });
 ```
 
