@@ -13,7 +13,7 @@
     "name": "node-seaweedfs",
     "description": "Node.js client for seaweed-fs, a distributed file store",
     "homepage": "https://github.com/atroo/node-weedfs",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "main": "./index",
     "repository": {
         "type": "git",
