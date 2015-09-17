@@ -150,7 +150,7 @@ client.find(fileId).then(function(json) {
 This function will delete a file from all locations.
 ```javascript
 client.remove(fileId).then(function() {
-    console.log("removed filed);
+    console.log("removed filed");
 }).catch(function(err) {
     console.log("could not remove " + fileId);
 });
