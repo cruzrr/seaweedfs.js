@@ -1,16 +1,131 @@
-var fs		= require("fs");
-var weedfs	= require("../../index.js");
-var assert	= require("assert");
+var fs = require("fs");
+var weedfs = require("../../index.js");
+var expect = require('chai').expect;
 
-var config = JSON.parse(fs.readFileSync(process.argv[2], "utf8"));
+var config = require("../testconf");
 var client = new weedfs(config);
 
-client.write("./tests/test.jpg", function(err, fileInfo) {
+var testFileBytes = 280072;
 
-	assert.ifError(err)
-	assert.ok(fileInfo, !null);
+describe("seaweed write api",function() {
+    it("should write a single file from a path", function(done) {
+        client.write("./test/tests/test.jpg").then(function (fileInfo) {
+            expect(fileInfo).to.be.an("object");
 
-	client.remove(fileInfo.fid, function(err, resp, body) {
-		assert.ok(resp.statusCode, 200);
-	});
+            return client.remove(fileInfo.fid);
+        }).then(function (res) {
+            expect(res).to.be.an("object");
+            expect(res.count).to.be.greaterThan(0);
+            done();
+        }).catch(function(err) {
+            console.log(err);
+        });
+        
+    });
+    
+    it("should write a single buffer", function(done) {
+        var fileInfo;
+        client.write(new Buffer("Hallo")).then(function (finfo) {
+            fileInfo = finfo;
+            expect(fileInfo).to.be.an("object");
+            
+            return client.read(fileInfo.fid);
+        }).then(function (buffer) {
+            expect(buffer.toString("utf8")).to.equal("Hallo");
+            return client.remove(fileInfo.fid);
+        }).then(function (res) {
+            expect(res).to.be.an("object");
+            expect(res.count).to.be.greaterThan(0);
+            done();
+        }).catch(function(err) {
+            console.log(err);
+        });
+        
+    });
+    
+    it("should write a single stream", function(done) {
+        var fileInfo;
+        client.write(fs.createReadStream("./test/tests/test.jpg")).then(function (finfo) {
+            fileInfo = finfo;
+            expect(fileInfo).to.be.an("object");
+
+            return client.read(fileInfo.fid);
+        }).then(function (buffer) {
+            expect(buffer.length).to.equal(testFileBytes);
+            return client.remove(fileInfo.fid);
+        }).then(function(res) {
+            expect(res).to.be.an("object");
+            expect(res.count).to.be.greaterThan(0);
+            done();
+        }).catch(function(err) {
+            console.log(err);
+        });
+        
+    });
+    
+    it("should write two files from path as array", function(done) {
+        client.write(["./test/tests/test.jpg", "./test/tests/test1.jpg"]).then(function (fileInfo) {
+            expect(fileInfo).to.be.an("object");
+
+            return client.remove(fileInfo.fid);
+        }).then(function (res) {
+            expect(res).to.be.an("object");
+            expect(res.count).to.be.greaterThan(0);
+            done();
+        }).catch(function(err) {
+            console.log(err);
+        });
+        
+    });
+    
+    it("should write two buffers", function(done) {
+        var fileInfo;
+        client.write([new Buffer("Hallo"), new Buffer("Hallo2")]).then(function (finfo) {
+            fileInfo = finfo;
+            expect(fileInfo).to.be.an("object");
+            
+            return client.read(fileInfo.fid);
+        }).then(function (buffer) {
+            expect(buffer.toString("utf8")).to.equal("Hallo");
+            return client.remove(fileInfo.fid);
+        }).then(function (res) {
+            expect(res).to.be.an("object");
+            expect(res.count).to.be.greaterThan(0);
+            done();
+        }).catch(function(err) {
+            console.log(err);
+        });
+        
+    });
+    
+    it("should write two streams", function(done) {
+        var fileInfo;
+        client.write([fs.createReadStream("./test/tests/test.jpg"), fs.createReadStream("./test/tests/test1.jpg")]).then(function (finfo) {
+            fileInfo = finfo;
+            expect(fileInfo).to.be.an("object");
+
+            return client.read(fileInfo.fid);
+        }).then(function (buffer) {
+            expect(buffer.length).to.equal(testFileBytes);
+            return client.remove(fileInfo.fid);
+        }).then(function(res) {
+            expect(res).to.be.an("object");
+            expect(res.count).to.be.greaterThan(0);
+            done();
+        }).catch(function(err) {
+            console.log(err);
+        });
+        
+    });
+    
+    it("should reject on invalid filepath", function(done) {
+        client.write("./test/tests/test25.jpg").then(function (fileInfo) {
+            return client.remove(fileInfo.fid);
+        }).then(function (res) {
+        }).catch(function(err) {
+            expect(err).to.be.an.instanceof(Error);
+            done();
+        });
+        
+    });
 });
