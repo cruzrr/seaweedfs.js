@@ -59,13 +59,15 @@ client.write(["./fileA.jpg", "./fileB.jpg"], function(err, fileInfo) {
 	// The fid's will be the same, to access each variaton just
 	// add _ARRAYINDEX to the end of the fid. In this case fileB
 	// would be: fid + "_1"
-	
+
 	var fidA = fileInfo;
 	var fidB = fileInfo + "_1";
-	
+
 	console.log(fileInfo);
 }
 ```
+
+For both methods of writing, a stream can be passed as a file.
 
 # read(fileId, [stream, cb])
 
