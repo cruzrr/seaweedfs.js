@@ -34,7 +34,7 @@ describe("seaweed read api", function () {
 
         var tmpBuffer = [];
         var resolveFunc;
-        
+
         //create own stream class on the fly to have a stream to write to
         function EchoStream() { // step 2
             stream.Writable.call(this);
@@ -65,4 +65,15 @@ describe("seaweed read api", function () {
             console.log(err);
         });
     });
+
+    it("should not find an unknown file during read", function(done) {
+        var fileInfo;
+        client.read("93,bla").then(function (res) {
+        }).catch(function(err) {
+            expect(err).to.be.an.instanceof(Error);
+            done();
+        });
+
+    });
+
 });
