@@ -1,35 +1,23 @@
 {
-    "author": "atroo",
-    "license" : "ISC",
-    "contributors": [{
-            "name": "atroo GbR",
-            "email": "info@atroo.de"
-    }, {
-            "name": "Aaron Blakely",
-            "email": "aaron@cruzrr.com"
-    }
-  ],
-    "keywords": ["weedfs", "seaweedfs", "seaweed", "driver", "filestorage", "distributed"],
-    "name": "node-seaweedfs",
-    "description": "Node.js client for seaweed-fs, a distributed file store",
-    "homepage": "https://github.com/atroo/node-weedfs",
-    "version": "1.3.0",
-    "main": "./index",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/atroo/node-weedfs"
-    },
-    "dependencies": {
-        "form-data": "^0.2.0"
-    },
-    "devDependencies": {
-        "chai": "^3.2.0",
-        "gulp": "^3.9.0",
-        "gulp-mocha": "^2.1.3",
-        "gulp-plumber": "^1.0.1",
-        "gulp-util": "^3.0.6"
-    },
-    "engines": {
-        "node": ">=0.12.0"
-    }
+	"author":	"cruzrr",
+	"contributors": [
+		{
+			"name":		"Aaron Blakely",
+			"email":	"aaron@cruzrr.com"
+		}
+	],
+	"name": 	"weed-fs",
+	"description":	"Node.js client for weed-fs, a distributed file store",
+	"homepage":	"https://github.com/cruzrr/node-weedfs",
+	"version":	"0.1.8a",
+	"main":		"./index",
+
+	"repository": {
+			"type":		"git",
+			"url":		"git://github.com/cruzrr/node-weedfs"
+	},
+
+	"dependencies": {
+		"request": "*"
+	}
 }
