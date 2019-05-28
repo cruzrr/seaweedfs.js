@@ -9,7 +9,7 @@
 	"name": 	"weed-fs",
 	"description":	"Node.js client for weed-fs, a distributed file store",
 	"homepage":	"https://github.com/cruzrr/node-weedfs",
-	"version":	"0.1.9",
+	"version":	"0.1.9a",
 	"main":		"./index",
 
 	"repository": {
@@ -19,5 +19,7 @@
 
 	"dependencies": {
 		"request": "*"
-	}
+	},
+	"license": "MIT"
 }
+
