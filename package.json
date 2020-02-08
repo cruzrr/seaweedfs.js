@@ -1,20 +1,20 @@
 {
-	"author":	"cruzrr",
+	"author":	"ablakely",
 	"contributors": [
 		{
 			"name":		"Aaron Blakely",
-			"email":	"aaron@cruzrr.com"
+			"email":	"aaron@ephasic.org"
 		}
 	],
-	"name": 	"weed-fs",
-	"description":	"Node.js client for weed-fs, a distributed file store",
-	"homepage":	"https://github.com/cruzrr/node-weedfs",
-	"version":	"0.1.9a",
+	"name": 	"seaweedfs.js",
+	"description":	"(orig: weed-fs) client for weed-fs, a distributed file store",
+	"homepage":	"https://github.com/cruzrr/seaweedfs.js",
+	"version":	"0.2.0",
 	"main":		"./index",
 
 	"repository": {
 			"type":		"git",
-			"url":		"git://github.com/cruzrr/node-weedfs"
+			"url":		"git://github.com/cruzrr/seaweedfs.js"
 	},
 
 	"dependencies": {
