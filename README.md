@@ -151,3 +151,6 @@ client.vacuum({garbageThreshold: 0.4}, function(status) {
 	console.log(status);
 });
 ```
+
+---
+_Copyright (C) 2013-2022 Aaron Blakely_
